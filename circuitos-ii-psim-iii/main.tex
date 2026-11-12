@@ -1,0 +1,781 @@
+\documentclass[12pt,a4paper]{article}
+
+% =====================================================
+% PACOTES
+% =====================================================
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage[american]{circuitikz}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{lastpage}
+\usepackage{setspace}
+\usepackage{tocloft}
+\usepackage{caption}
+\usepackage[most]{tcolorbox}
+
+% =====================================================
+% CONFIGURAÇÕES DA PÁGINA
+% =====================================================
+\geometry{top=2.5cm,bottom=2.5cm,left=3cm,right=2cm}
+\setlength{\parindent}{1.25cm}
+\setlength{\headheight}{42pt}
+\setlength{\footskip}{28pt}
+\onehalfspacing
+
+% =====================================================
+% COMANDO DO LOGO
+% =====================================================
+\newcommand{\LogoIFMT}[1][]{%
+\IfFileExists{logo-ifmt.png}{\includegraphics[#1]{logo-ifmt.png}}{%
+\IfFileExists{logo-ifmt.jpg}{\includegraphics[#1]{logo-ifmt.jpg}}{%
+\IfFileExists{logo-ifmt.pdf}{\includegraphics[#1]{logo-ifmt.pdf}}{%
+\fbox{\rule{0pt}{1.2cm}\rule{2.5cm}{0pt}}}}}%
+}
+
+% =====================================================
+% COMANDO PARA INSERIR IMAGEM OU ESPAÇO RESERVADO
+% =====================================================
+\newcommand{\ImagemOuEspaco}[3]{%
+\begin{figure}[H]
+\centering
+\IfFileExists{#1}{%
+\includegraphics[width=#2\textwidth]{#1}
+}{%
+\fbox{%
+\begin{minipage}{#2\textwidth}
+\vspace{2.8cm}
+\centering
+\textbf{Espaço reservado para imagem da simulação}\\[0.2cm]
+Arquivo esperado: \texttt{\detokenize{#1}}
+\vspace{2.8cm}
+\end{minipage}
+}
+}
+\caption{#3}
+\end{figure}
+}
+
+% =====================================================
+% CAIXA PARA CÁLCULOS RESUMIDOS
+% =====================================================
+\newtcolorbox{caixacalculo}[1]{%
+enhanced,
+breakable,
+colback=gray!4,
+colframe=black!55,
+coltitle=black,
+fonttitle=\bfseries,
+title={#1},
+arc=2mm,
+boxrule=0.6pt,
+left=6pt,
+right=6pt,
+top=6pt,
+bottom=6pt
+}
+
+% =====================================================
+% CABEÇALHO E RODAPÉ
+% =====================================================
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{%
+\LogoIFMT[height=1.3cm]
+}
+
+\fancyhead[R]{%
+\fontsize{12}{14}\selectfont Circuitos Elétricos II
+}
+
+\renewcommand{\headrulewidth}{0.4pt}
+
+\fancyfoot[C]{%
+\fontsize{8.5}{10}\selectfont
+Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso | 2026 | Nicoly Canteiro Araújo
+}
+
+\renewcommand{\footrulewidth}{0.4pt}
+
+% =====================================================
+% ESTILO DO SUMÁRIO
+% =====================================================
+\renewcommand{\contentsname}{Sumário}
+\setlength{\cftbeforesecskip}{10pt}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecfont}{\bfseries}
+\renewcommand{\cftsecpagefont}{\bfseries}
+
+\begin{document}
+
+% =====================================================
+% CAPA
+% =====================================================
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+
+\vspace*{1cm}
+
+\LogoIFMT[width=0.6\textwidth]
+
+\vspace{1.5cm}
+
+{\large \textbf{INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO}}\\
+{\large Campus Pontes e Lacerda -- Fronteira Oeste}
+
+\vspace{2.5cm}
+
+{\Large \textbf{RELATÓRIO TÉCNICO}}
+
+\vspace{0.8cm}
+
+{\large Circuitos Elétricos II}
+
+\vspace{1.8cm}
+
+{\LARGE \textbf{EXPERIMENTO 4}}
+
+\vspace{0.5cm}
+
+{\large Determinação de potência e compensação de fator de potência}
+
+\vfill
+
+Pontes e Lacerda -- MT\\
+2026
+
+\end{center}
+\end{titlepage}
+
+% =====================================================
+% FOLHA DE ROSTO
+% =====================================================
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{center}
+
+\vspace*{2.5cm}
+
+{\large Nicoly Canteiro Araújo e colegas de grupo}
+
+\vspace{2.5cm}
+
+{\Large \textbf{RELATÓRIO TÉCNICO}}
+
+\vspace{0.8cm}
+
+{\large Determinação de potência e compensação de fator de potência}
+
+\end{center}
+
+\vspace{2.5cm}
+
+\hspace*{7.5cm}
+\begin{minipage}{7.5cm}
+Relatório técnico apresentado à disciplina de Circuitos Elétricos II do Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso, Campus Pontes e Lacerda -- Fronteira Oeste, como requisito parcial para avaliação acadêmica.
+\end{minipage}
+
+\vspace{2cm}
+
+\noindent
+\textbf{Aluno(a):} Nicoly Canteiro Araújo
+
+\vspace{0.3cm}
+
+
+\vspace{0.3cm}
+
+\noindent
+\textbf{Professor:} Professor da disciplina
+
+\vfill
+
+\begin{center}
+Pontes e Lacerda -- MT\\
+2026
+\end{center}
+
+\end{titlepage}
+
+% =====================================================
+% RESUMO
+% =====================================================
+\newpage
+\section*{Resumo}
+\addcontentsline{toc}{section}{Resumo}
+
+Este relatório apresenta a análise de circuitos elétricos em corrente alternada simulados no software PSIM, com foco na leitura de potência ativa por wattímetro e na correção do fator de potência. A atividade envolve circuitos com elementos resistivos, indutivos e capacitivos, permitindo observar de forma prática o comportamento das grandezas elétricas em regime permanente.
+
+Nas Questões A, B e C, os circuitos foram montados conforme os diagramas propostos, e as leituras dos wattímetros foram registradas diretamente nas simulações. Já na etapa de correção do fator de potência, foi analisada uma associação em paralelo formada por aquecedor, motor de indução e capacitor de compensação.
+
+A partir das imagens e dos valores obtidos no PSIM, foi possível relacionar a montagem dos circuitos com os resultados apresentados, mantendo uma análise objetiva e coerente com o que foi solicitado em cada questão.
+
+% =====================================================
+% SUMÁRIO AUTOMÁTICO
+% =====================================================
+\clearpage
+\setcounter{page}{1}
+
+\tableofcontents
+
+\newpage
+
+% =====================================================
+% OBJETIVO
+% =====================================================
+\section*{1. Objetivo}
+\addcontentsline{toc}{section}{1 \hspace{0.8em} Objetivo}
+
+\begin{itemize}
+\item Analisar o comportamento de circuitos elétricos em corrente alternada por meio de simulações no PSIM;
+\item Implementar os circuitos propostos e registrar a leitura do wattímetro em cada simulação;
+\item Observar a influência de resistores, capacitores e indutores no comportamento das grandezas elétricas simuladas;
+\item Verificar a compensação do fator de potência por meio da inserção de capacitor em paralelo com a carga.
+\end{itemize}
+
+% =====================================================
+% SOFTWARE
+% =====================================================
+\section*{2. Software}
+\addcontentsline{toc}{section}{2 \hspace{0.8em} Software}
+
+As simulações foram realizadas no software PSIM, utilizado para a montagem dos circuitos em corrente alternada e para a inserção dos instrumentos de medição. O programa permitiu visualizar os circuitos, acompanhar os gráficos das grandezas elétricas e registrar as leituras obtidas nos wattímetros e demais medições utilizadas durante o experimento.
+
+\newpage
+
+% =====================================================
+% PROCEDIMENTOS EXPERIMENTAIS
+% =====================================================
+\section*{3. Procedimentos Experimentais}
+\addcontentsline{toc}{section}{3 \hspace{0.8em} Procedimentos Experimentais}
+
+Para cada questão, o circuito foi montado no ambiente PSIM conforme o diagrama apresentado no roteiro experimental. Após a montagem, foram inseridos os instrumentos necessários para observar a resposta do circuito e registrar a leitura do wattímetro. As imagens apresentadas ao longo do relatório mostram tanto a montagem realizada no software quanto o resultado obtido durante a simulação.
+
+% =====================================================
+% QUESTÃO A
+% =====================================================
+\subsection*{Questão A -- Leitura do wattímetro no circuito da Figura 01}
+
+\textbf{Enunciado:} Use o PSIM para determinar a leitura do wattímetro do circuito da Figura 01.
+
+\vspace{0.5cm}
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american currents, american voltages, scale=1.0, transform shape]
+
+% =====================================================
+% QUESTAO A - CIRCUITO ORGANIZADO SEM PERNINHA
+% =====================================================
+
+% Fonte de tensão
+\draw
+(0,0) to[sV] (0,3);
+
+% Descrição da fonte
+\node[left] at (-0.55,1.5) {$150\angle 0^\circ\mathrm{V_{RMS}}$};
+
+% Barramento inferior (termina no capacitor)
+\draw
+(0,0) -- (9.0,0);
+
+% Ramo superior esquerdo
+\draw
+(0,3) -- (1.0,3)
+to[R, l={$12\Omega$}] (2.8,3)
+to[L, l={$j10\Omega$}] (4.8,3)
+-- (5.4,3);
+
+% Wattímetro - caixa externa
+\draw
+(5.4,1.10) rectangle (8.2,3.70);
+
+% Letra W
+\node at (6.8,3.45) {\textbf{W}};
+
+% Bobina de corrente do wattímetro
+\draw
+(5.4,3) to[L] (7.4,3)
+-- (8.2,3);
+
+% Polaridade da bobina de corrente
+\node at (5.7,3.28) {$+$};
+
+% Bobina de potencial do wattímetro
+\draw
+(5.8,1.75) to[L] (7.2,1.75);
+
+% Ligações da bobina de potencial
+\draw
+(5.8,1.75) -- (5.8,0);
+\draw
+(7.2,1.75) -- (7.2,3);
+
+% Polaridade da bobina de potencial
+\node at (7.45,2.00) {$+$};
+
+% Carga da direita
+\draw
+(8.2,3) -- (9.0,3)
+to[R, l={$8\Omega$}] (9.0,1.55)
+to[C, l={$-j6\Omega$}] (9.0,0);
+
+\end{circuitikz}
+\caption{Circuito elétrico em corrente alternada da Questão A.}
+\end{figure}
+
+\ImagemOuEspaco{A.png}{0.85}{Montagem da Questão A no PSIM.}
+
+\ImagemOuEspaco{A1.png}{0.85}{Leitura do wattímetro da Questão A no PSIM.}
+
+\begin{caixacalculo}{Cálculo resumido -- Questão A}
+Considerando os valores do circuito em regime permanente:
+\[
+Z_T=(12+j10)+(8-j6)=20+j4 \,\Omega
+\]
+\[
+I=\frac{150\angle 0^\circ}{20+j4}
+\qquad
+|I|\approx 7{,}35\,\mathrm{A}
+\]
+Como o wattímetro está associado ao ramo da carga resistiva de $8\,\Omega$, a potência ativa indicada fica:
+\[
+P_W=|I|^2\cdot 8 \approx (7{,}35)^2\cdot 8 \approx 432{,}7\,\mathrm{W}
+\]
+No PSIM, a leitura estabilizada ficou próxima de:
+\[
+P_W \approx 430{,}88\,\mathrm{W}
+\]
+\end{caixacalculo}
+
+\subsubsection*{Comentário da simulação}
+
+Na Questão A, a montagem no PSIM ficou coerente com o circuito proposto, pois foram inseridos a fonte alternada, os elementos resistivos e reativos e o wattímetro no ponto indicado. O gráfico da potência apresenta um pequeno transitório inicial e, em seguida, estabiliza próximo de $430{,}88\,\mathrm{W}$.
+
+Esse resultado mostra que o wattímetro está registrando a potência ativa da parte medida do circuito. Mesmo com a presença do indutor e do capacitor, a leitura final permanece associada à parcela real de potência, que é a energia efetivamente consumida pela carga resistiva.
+
+\vspace{0.5cm}
+
+% =====================================================
+% QUESTÃO B
+% =====================================================
+\newpage
+\subsection*{Questão B -- Leitura do wattímetro no circuito da Figura 02}
+
+\textbf{Enunciado:} Para o circuito da Figura 02, implemente-o via PSIM e determine a leitura do wattímetro.
+
+\vspace{0.5cm}
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american currents, american voltages, scale=1.0, transform shape]
+
+% =====================================================
+% QUESTAO B - CIRCUITO ORGANIZADO
+% =====================================================
+
+% -----------------------------------------------------
+% Fonte de tensão
+% -----------------------------------------------------
+\draw
+(0,0) to[sV] (0,3);
+
+% Descrição da fonte no lado esquerdo
+\node[left] at (-0.55,1.5) {$120\angle 30^\circ\mathrm{V_{RMS}}$};
+
+% -----------------------------------------------------
+% Barramento inferior
+% -----------------------------------------------------
+\draw
+(0,0) -- (10.4,0);
+
+% Ligação superior até o wattímetro
+\draw
+(0,3) -- (1.1,3);
+
+% -----------------------------------------------------
+% Wattímetro
+% -----------------------------------------------------
+
+% Caixa externa
+\draw
+(1.1,1.15) rectangle (4.5,3.85);
+
+% Letra W
+\node at (2.8,3.55) {\textbf{W}};
+
+% Bobina de corrente (superior)
+\draw
+(1.1,3) -- (1.65,3)
+to[L] (3.45,3)
+-- (4.5,3);
+
+% Polaridade da bobina superior
+\node at (1.55,3.30) {$+$};
+
+% Bobina de potencial (inferior)
+\draw
+(1.65,1.85) to[L] (3.45,1.85);
+
+% Ligações da bobina inferior
+\draw
+(1.65,1.85) -- (1.65,0);
+\draw
+(3.45,1.85) -- (3.45,3);
+
+% Polaridade da bobina inferior
+\node at (3.72,2.10) {$+$};
+
+% -----------------------------------------------------
+% Ramo em série após o wattímetro
+% -----------------------------------------------------
+\draw
+(4.5,3) -- (5.3,3)
+to[R, l={$4\Omega$}] (6.9,3)
+to[C, l={$-j2\Omega$}] (8.6,3)
+-- (9.2,3);
+
+% -----------------------------------------------------
+% Ramos em paralelo da direita
+% -----------------------------------------------------
+
+% Indutor
+\draw
+(9.2,3) to[L, l_={$j9\Omega$}] (9.2,0);
+
+% Resistor
+\draw
+(10.4,3) to[R, l={$12\Omega$}] (10.4,0);
+
+% Ligação superior entre os dois ramos
+\draw
+(9.2,3) -- (10.4,3);
+
+\end{circuitikz}
+\caption{Circuito elétrico em corrente alternada da Questão B.}
+\end{figure}
+
+\ImagemOuEspaco{B.png}{0.85}{Montagem da Questão B no PSIM.}
+
+\ImagemOuEspaco{B2.png}{0.85}{Leitura do wattímetro da Questão B no PSIM.}
+
+\begin{caixacalculo}{Cálculo resumido -- Questão B}
+Para a associação em paralelo da direita:
+\[
+Z_p=\frac{(j9)(12)}{j9+12}
+\]
+A impedância equivalente do circuito fica representada por:
+\[
+Z_T=(4-j2)+Z_p
+\]
+A potência ativa indicada pelo wattímetro pode ser obtida por:
+\[
+P_W=V_{\mathrm{RMS}}\cdot I_{\mathrm{RMS}}\cdot \cos(\varphi)
+\]
+Na simulação, após a montagem dos componentes e a estabilização da leitura, obteve-se:
+\[
+P_W \approx 1421{,}70\,\mathrm{W}
+\]
+\end{caixacalculo}
+
+\subsubsection*{Comentário da simulação}
+
+Na Questão B, o circuito foi montado corretamente no PSIM, com o wattímetro posicionado na entrada do circuito para registrar a potência ativa resultante. A fonte possui defasagem angular, e a carga apresenta uma combinação de resistor, capacitor e indutor, o que altera a corrente total do circuito.
+
+A leitura estabilizada ficou próxima de $1421{,}70\,\mathrm{W}$. Esse valor confirma que a simulação realizou o que foi pedido no enunciado: implementar o circuito e determinar a leitura do wattímetro. A análise é coerente, pois a potência indicada corresponde à parcela ativa medida pelo instrumento virtual.
+
+\vspace{0.5cm}
+
+% =====================================================
+% QUESTÃO C
+% =====================================================
+\newpage
+\subsection*{Questão C -- Leitura do wattímetro no circuito da Figura 03}
+
+\textbf{Enunciado:} Use o PSIM para determinar a leitura do wattímetro para o circuito mostrado.
+
+\vspace{0.5cm}
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american currents, american voltages, scale=1.0, transform shape]
+
+% =====================================================
+% QUESTAO C - CIRCUITO ORGANIZADO
+% =====================================================
+
+% -----------------------------------------------------
+% Fonte de tensão
+% -----------------------------------------------------
+\draw
+(0,0) to[sV] (0,3);
+
+\node[left] at (-0.55,1.5) {$12\angle 0^\circ\mathrm{V}$};
+
+% -----------------------------------------------------
+% Barramento inferior
+% -----------------------------------------------------
+\draw
+(0,0) -- (10.2,0);
+
+% -----------------------------------------------------
+% Ramo superior esquerdo
+% -----------------------------------------------------
+\draw
+(0,3) -- (0.9,3)
+to[R] (2.2,3)
+to[C] (3.6,3)
+-- (4.2,3);
+
+% Rótulos superiores
+\node at (1.55,3.45) {$4\Omega$};
+\node at (2.90,3.58) {$-j3\Omega$};
+
+% -----------------------------------------------------
+% Ramos verticais em paralelo
+% -----------------------------------------------------
+
+% Indutor
+\draw
+(4.2,3) to[L] (4.2,0);
+
+\node[left] at (3.85,1.5) {$j2\Omega$};
+
+% Resistor
+\draw
+(5.5,3) to[R] (5.5,0);
+
+\node[left] at (5.10,1.5) {$8\Omega$};
+
+% Ligação superior entre os ramos
+\draw
+(4.2,3) -- (5.5,3);
+
+% -----------------------------------------------------
+% Wattímetro
+% -----------------------------------------------------
+
+% Caixa externa
+\draw
+(6.1,1.00) rectangle (8.9,3.90);
+
+% Letra W
+\node at (7.50,3.60) {\textbf{W}};
+
+% Bobina de corrente (superior)
+\draw
+(5.5,3) -- (6.5,3)
+to[L] (8.0,3)
+-- (8.9,3);
+
+% Polaridade da bobina superior
+\node at (6.30,3.30) {$+$};
+
+% Bobina de potencial (inferior)
+\draw
+(6.5,1.80) to[L] (8.0,1.80);
+
+% Ligações da bobina inferior
+\draw
+(6.5,3) -- (6.5,1.80);
+\draw
+(8.0,1.80) -- (8.6,1.80);
+\draw
+(8.6,1.80) -- (8.6,0);
+
+% Polaridade da bobina inferior
+\node at (6.30,2.10) {$+$};
+
+% -----------------------------------------------------
+% Ligação até a fonte de corrente
+% -----------------------------------------------------
+\draw
+(8.9,3) -- (10.2,3);
+
+% -----------------------------------------------------
+% Fonte de corrente
+% -----------------------------------------------------
+\draw
+(10.2,0) to[I] (10.2,3);
+
+\node[right] at (10.65,1.5) {$3\angle 30^\circ\mathrm{A}$};
+
+\end{circuitikz}
+
+\vspace{0.3cm}
+\caption{Circuito elétrico em corrente alternada da Questão C.}
+\end{figure}
+
+\ImagemOuEspaco{C.png}{0.85}{Montagem da Questão C no PSIM.}
+
+\ImagemOuEspaco{C3.png}{0.85}{Leitura do wattímetro da Questão C no PSIM.}
+
+\begin{caixacalculo}{Cálculo resumido -- Questão C}
+Como o circuito possui fonte de tensão e fonte de corrente, a leitura do wattímetro depende da tensão aplicada na bobina de potencial e da corrente que passa pela bobina de corrente. A potência ativa medida é dada por:
+\[
+P_W=V_{\mathrm{bobina}}\cdot I_{\mathrm{bobina}}\cdot
+\cos(\theta_V-\theta_I)
+\]
+Pela simulação no PSIM, a leitura estabilizada foi:
+\[
+P_W \approx 9{,}73\,\mathrm{W}
+\]
+\end{caixacalculo}
+
+\subsubsection*{Comentário da simulação}
+
+Na Questão C, a montagem ficou coerente com o diagrama, pois foram inseridas as duas fontes, os elementos passivos e o wattímetro na posição solicitada. Por haver uma fonte de tensão e uma fonte de corrente no mesmo circuito, a leitura depende diretamente da relação de fase entre tensão e corrente no trecho medido.
+
+O valor obtido foi de aproximadamente $9{,}73\,\mathrm{W}$. A simulação atende ao enunciado, pois apresenta a leitura do wattímetro e mostra que a potência ativa medida nesse ponto do circuito é pequena em relação às Questões A e B.
+
+% =====================================================
+% CORREÇÃO DO FATOR DE POTÊNCIA
+% =====================================================
+\newpage
+\section*{4. Correção do fator de potência}
+\addcontentsline{toc}{section}{4 \hspace{0.8em} Correção do fator de potência}
+
+\textbf{Enunciado:} Uma fonte de $240,\mathrm{V_{RMS}}$, $60,\mathrm{Hz}$ alimenta uma associação em paralelo entre um aquecedor de $5,\mathrm{kW}$ e um motor de indução de $30,\mathrm{kVA}$ cujo fator de potência é $0{,}82$. Determine:
+
+\begin{itemize}
+\item[(a)] A potência aparente do sistema;
+\item[(b)] A potência reativa do sistema;
+\item[(c)] O valor nominal em kVA de um capacitor necessário para ajustar o fator de potência do sistema para $0{,}9$ atrasado;
+\item[(d)] O valor do capacitor necessário.
+\end{itemize}
+
+\subsection*{Análise da correção}
+
+A correção do fator de potência foi analisada considerando a associação em paralelo entre o aquecedor e o motor de indução. O aquecedor atua como carga essencialmente resistiva, enquanto o motor apresenta comportamento indutivo, causando atraso da corrente em relação à tensão.
+
+A proposta da compensação é inserir um capacitor em paralelo para reduzir a parcela reativa indutiva exigida da fonte. Assim, o sistema passa a trabalhar com fator de potência mais próximo do valor desejado, sem alterar de forma significativa a potência ativa consumida pelas cargas.
+
+\newpage
+\begin{caixacalculo}{Cálculo resumido -- Correção do fator de potência}
+Dados do problema:
+\[
+V=240\,\mathrm{V_{RMS}},
+\qquad
+f=60\,\mathrm{Hz},
+\qquad
+P_{\mathrm{aquecedor}}=5\,\mathrm{kW}
+\]
+\[
+S_{\mathrm{motor}}=30\,\mathrm{kVA},
+\qquad
+fp_{\mathrm{motor}}=0{,}82,
+\qquad
+fp_{\mathrm{corrigido}}=0{,}90
+\]
+
+Potência ativa do motor:
+\[
+P_{\mathrm{motor}}=S_{\mathrm{motor}}\cdot fp
+=30\cdot 0{,}82=24{,}6\,\mathrm{kW}
+\]
+
+Potência ativa total:
+\[
+P_T=P_{\mathrm{aquecedor}}+P_{\mathrm{motor}}
+=5+24{,}6=29{,}6\,\mathrm{kW}
+\]
+
+Potência reativa do motor e do sistema:
+\[
+Q_T=S_{\mathrm{motor}}\cdot \sin(\cos^{-1}0{,}82)
+\approx 17{,}17\,\mathrm{kVAr}
+\]
+
+Potência aparente do sistema antes da compensação:
+\[
+S_T=\sqrt{P_T^2+Q_T^2}
+=\sqrt{(29{,}6)^2+(17{,}17)^2}
+\approx 34{,}22\,\mathrm{kVA}
+\]
+
+Potência reativa desejada para $fp=0{,}90$:
+\[
+Q_{\mathrm{novo}}=P_T\cdot \tan(\cos^{-1}0{,}90)
+\approx 14{,}33\,\mathrm{kVAr}
+\]
+
+Potência reativa que o capacitor deve compensar:
+\[
+Q_C=Q_T-Q_{\mathrm{novo}}
+=17{,}17-14{,}33
+\approx 2{,}84\,\mathrm{kVAr}
+\]
+
+Valor do capacitor:
+\[
+C=\frac{Q_C}{2\pi f V^2}
+=\frac{2{,}84\times 10^3}{2\pi\cdot 60\cdot (240)^2}
+\approx 130{,}6\,\mu\mathrm{F}
+\]
+
+Portanto:
+\[
+S_T\approx 34{,}22\,\mathrm{kVA},
+\qquad
+Q_T\approx 17{,}17\,\mathrm{kVAr},
+\qquad
+Q_C\approx 2{,}84\,\mathrm{kVAr},
+\qquad
+C\approx 130{,}6\,\mu\mathrm{F}
+\]
+\end{caixacalculo}
+
+As imagens seguintes apresentam a montagem utilizada no PSIM e os resultados observados durante a simulação, incluindo as medições de potência e a verificação do comportamento do circuito com a compensação capacitiva.
+
+\ImagemOuEspaco{D.png}{0.85}{Determinação da potência aparente do sistema na Questão 4.}
+
+\ImagemOuEspaco{D1.png}{0.85}{Análise da potência aparente na simulação da Questão 4.}
+
+\ImagemOuEspaco{D2.png}{0.85}{Medição da potência ativa do sistema na Questão 4.}
+
+\ImagemOuEspaco{D3.png}{0.85}{Correção do fator de potência com a inserção do capacitor.}
+
+\ImagemOuEspaco{D4.png}{0.85}{Verificação do fator de potência antes da compensação capacitiva.}
+
+\subsubsection*{Comentário da simulação}
+
+Na correção do fator de potência, a simulação mostra de forma clara a função do capacitor em paralelo com a carga. Antes da compensação, o motor de indução faz a corrente ficar mais atrasada em relação à tensão, aumentando a presença de potência reativa no sistema.
+
+Após a inserção do capacitor, a defasagem diminui e o fator de potência melhora. A potência ativa continua associada ao aquecedor e ao motor, enquanto o capacitor atua principalmente reduzindo a exigência de potência reativa indutiva da fonte. Assim, a questão está coerente com o objetivo proposto, pois apresenta a compensação capacitiva e seus efeitos no circuito.
+
+% =====================================================
+% DISCUSSÃO DOS RESULTADOS
+% =====================================================
+\newpage
+\section*{5. Discussão dos Resultados}
+\addcontentsline{toc}{section}{5 \hspace{0.8em} Discussão dos Resultados}
+
+As simulações no PSIM permitiram verificar as leituras dos wattímetros e relacionar cada resultado ao comportamento do circuito montado. Nas Questões A, B e C, os valores estabilizados foram, respectivamente, $430{,}88\,\mathrm{W}$, $1421{,}70\,\mathrm{W}$ e $9{,}73\,\mathrm{W}$.
+
+Na Questão A, a leitura ficou coerente com a potência ativa medida no ramo resistivo associado ao wattímetro. Na Questão B, o valor maior de potência ocorre pela configuração da carga e pela associação dos elementos em série e paralelo. Na Questão C, a presença simultânea de fonte de tensão e fonte de corrente torna a leitura mais dependente do ponto de medição, resultando em uma potência ativa menor.
+
+Na correção do fator de potência, o capacitor inserido em paralelo reduz a parcela reativa indutiva do sistema. Com isso, a corrente fica menos defasada em relação à tensão, e o sistema passa a operar com melhor aproveitamento da potência fornecida pela fonte.
+
+% =====================================================
+% CONCLUSÃO
+% =====================================================
+\newpage
+\section*{Conclusão}
+\addcontentsline{toc}{section}{Conclusão}
+
+O experimento permitiu analisar, por meio do PSIM, a leitura de potência ativa em circuitos de corrente alternada e a correção do fator de potência em uma carga com característica indutiva. As montagens apresentadas estão de acordo com os enunciados, e os resultados obtidos pelos wattímetros foram registrados de forma clara.
+
+Nas três primeiras questões, foi possível observar que os elementos reativos alteram a corrente e a defasagem do circuito, mas o wattímetro indica a potência ativa no ponto em que foi conectado. Na última questão, a inserção do capacitor demonstrou a redução da potência reativa indutiva e a melhoria do fator de potência.
+
+Dessa forma, o PSIM se mostrou adequado para a análise proposta, pois permitiu montar os circuitos, acompanhar os gráficos e comparar os resultados simulados com os cálculos resumidos apresentados no relatório.
+
+\end{document}
