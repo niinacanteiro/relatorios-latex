@@ -1,0 +1,466 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{geometry}
+
+\geometry{
+left=2cm,
+right=2cm,
+top=2cm,
+bottom=2cm
+}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{FOLHA DE REVISÃO - INTEGRAÇÃO NUMÉRICA}}
+\end{center}
+
+\hrule
+
+\section*{1. Roteiro para Resolver Qualquer Questão}
+
+Dada uma integral
+
+\[
+I=\int_a^b f(x)\,dx
+\]
+
+sempre siga esta sequência:
+
+\begin{enumerate}
+\item Identifique os limites \(a\) e \(b\)
+\item Identifique o método pedido
+\item Determine o número de subintervalos \(n\)
+\item Calcule \(h\)
+\item Encontre os pontos \(x_i\)
+\item Calcule os valores \(f(x_i)\)
+\item Monte a tabela
+\item Substitua na fórmula
+\end{enumerate}
+
+\hrule
+
+\section*{2. Cálculo de \(h\)}
+
+A largura dos subintervalos é
+
+\[
+h=\frac{b-a}{n}
+\]
+
+onde
+
+\[
+a=\text{limite inferior}
+\]
+
+\[
+b=\text{limite superior}
+\]
+
+\[
+n=\text{número de subintervalos}
+\]
+
+\hrule
+
+\section*{3. Como Encontrar os Pontos}
+
+Após calcular \(h\):
+
+\[
+x_i=a+i\cdot h
+\]
+
+Exemplo:
+
+\[
+x_0=a
+\]
+
+\[
+x_1=a+h
+\]
+
+\[
+x_2=a+2h
+\]
+
+\[
+x_3=a+3h
+\]
+
+\[
+x_4=a+4h
+\]
+
+\hrule
+
+\section*{4. Trapézio Simples}
+
+Sempre utiliza:
+
+\[
+n=1
+\]
+
+Coeficientes:
+
+\[
+1 \qquad 1
+\]
+
+Fórmula:
+
+\[
+I
+\approx
+\frac{b-a}{2}
+\left[f(a)+f(b)\right]
+\]
+
+\textbf{Observação:}
+
+Utiliza apenas os extremos do intervalo.
+
+\hrule
+
+\section*{5. Trapézio Composto}
+
+O valor de \(n\) é informado no exercício.
+
+Coeficientes:
+
+\[
+1 \quad 2 \quad 2 \quad \cdots \quad 2 \quad 1
+\]
+
+Fórmula:
+
+\[
+I
+\approx
+\frac{h}{2}
+\left[
+f_0
++
+2f_1
++
+2f_2
++
+\cdots
++
+2f_{n-1}
++
+f_n
+\right]
+\]
+
+Exemplo para \(n=4\):
+
+\[
+1 \quad 2 \quad 2 \quad 2 \quad 1
+\]
+
+\hrule
+
+\section*{6. Simpson 1/3}
+
+Sempre utiliza:
+
+\[
+n=2
+\]
+
+Coeficientes:
+
+\[
+1 \qquad 4 \qquad 1
+\]
+
+Fórmula:
+
+\[
+I
+\approx
+\frac{h}{3}
+\left[
+f_0+4f_1+f_2
+\right]
+\]
+
+Passos:
+
+\[
+h=\frac{b-a}{2}
+\]
+
+\[
+x_0=a
+\]
+
+\[
+x_1=a+h
+\]
+
+\[
+x_2=b
+\]
+
+\textbf{Decore:}
+
+\[
+1 \qquad 4 \qquad 1
+\]
+
+\hrule
+
+\section*{7. Simpson 3/8}
+
+Sempre utiliza:
+
+\[
+n=3
+\]
+
+Coeficientes:
+
+\[
+1 \qquad 3 \qquad 3 \qquad 1
+\]
+
+Fórmula:
+
+\[
+I
+\approx
+\frac{3h}{8}
+\left[
+f_0+3f_1+3f_2+f_3
+\right]
+\]
+
+Passos:
+
+\[
+h=\frac{b-a}{3}
+\]
+
+\[
+x_0=a
+\]
+
+\[
+x_1=a+h
+\]
+
+\[
+x_2=a+2h
+\]
+
+\[
+x_3=b
+\]
+
+\textbf{Decore:}
+
+\[
+1 \qquad 3 \qquad 3 \qquad 1
+\]
+
+\hrule
+
+\section*{8. Exercício Resolvido}
+
+Calcular
+
+\[
+I=
+\int_0^{2\pi}
+(6+3\cos x)\,dx
+\]
+
+Defina:
+
+\[
+f(x)=6+3\cos x
+\]
+
+\subsection*{Valores da Função}
+
+\[
+f(0)=9
+\]
+
+\[
+f\left(\frac{\pi}{2}\right)=6
+\]
+
+\[
+f(\pi)=3
+\]
+
+\[
+f\left(\frac{3\pi}{2}\right)=6
+\]
+
+\[
+f(2\pi)=9
+\]
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+$x$ & $f(x)$\\
+\midrule
+$0$ & $9$\\
+$\frac{\pi}{2}$ & $6$\\
+$\pi$ & $3$\\
+$\frac{3\pi}{2}$ & $6$\\
+$2\pi$ & $9$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\hrule
+
+\section*{9. Subintervalos da Questão}
+
+\subsection*{Trapézio Simples}
+
+\[
+n=1
+\]
+
+\[
+h=2\pi
+\]
+
+Pontos:
+
+\[
+0,\;2\pi
+\]
+
+\subsection*{Trapézio Composto (\(n=4\))}
+
+\[
+h=\frac{2\pi}{4}
+=
+\frac{\pi}{2}
+\]
+
+Pontos:
+
+\[
+0,\;
+\frac{\pi}{2},\;
+\pi,\;
+\frac{3\pi}{2},\;
+2\pi
+\]
+
+\subsection*{Simpson 1/3}
+
+\[
+n=2
+\]
+
+\[
+h=\pi
+\]
+
+Pontos:
+
+\[
+0,\;
+\pi,\;
+2\pi
+\]
+
+\subsection*{Simpson 3/8}
+
+\[
+n=3
+\]
+
+\[
+h=\frac{2\pi}{3}
+\]
+
+Pontos:
+
+\[
+0,\;
+\frac{2\pi}{3},\;
+\frac{4\pi}{3},\;
+2\pi
+\]
+
+\hrule
+
+\section*{10. Valores Trigonométricos Mais Importantes}
+
+\[
+\cos(0)=1
+\]
+
+\[
+\cos\left(\frac{\pi}{2}\right)=0
+\]
+
+\[
+\cos(\pi)=-1
+\]
+
+\[
+\cos\left(\frac{3\pi}{2}\right)=0
+\]
+
+\[
+\cos(2\pi)=1
+\]
+
+\hrule
+
+\section*{11. Resumo para Decorar}
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Método & Coeficientes \\
+\midrule
+Trapézio Simples & $1 \;\; 1$ \\
+Trapézio Composto & $1 \;\; 2 \;\; 2 \;\; \cdots \;\; 2 \;\; 1$ \\
+Simpson 1/3 & $1 \;\; 4 \;\; 1$ \\
+Simpson 3/8 & $1 \;\; 3 \;\; 3 \;\; 1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\hrule
+
+\section*{12. Erros Mais Comuns}
+
+\begin{enumerate}
+\item Esquecer de calcular \(h\)
+\item Errar os pontos \(x_i\)
+\item Utilizar coeficientes incorretos
+\item Esquecer o fator da fórmula:
+\[
+\frac{h}{2},
+\qquad
+\frac{h}{3},
+\qquad
+\frac{3h}{8}
+\]
+\item Errar os valores trigonométricos
+\end{enumerate}
+
+\end{document}
