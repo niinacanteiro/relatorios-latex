@@ -1,0 +1,468 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage[american]{circuitikz}
+\usetikzlibrary{arrows.meta,positioning}
+
+\geometry{top=1.5cm,bottom=1.6cm,left=1.45cm,right=1.45cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.25em}
+\setlength{\columnsep}{0.9cm}
+\setlength{\columnseprule}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage}
+\definecolor{ifmtblue}{RGB}{37,129,157}
+\definecolor{ifmtgray}{RGB}{70,70,70}
+
+\titleformat{\section}[block]{\large\bfseries\centering}{}{0pt}{}
+
+\newcommand{\itemtitulo}[1]{\textbf{Item #1 -- }}
+\newcommand{\figleg}[1]{\vspace{0.05cm}{\centering\scriptsize Figura #1 -- Esquema do circuito elétrico.\par}}
+
+\begin{document}
+
+\begin{center}
+    {\small Instituto Federal de Educação, Ciência e Tecnologia -- IFMT}\\[-1mm]
+    {\small Campus Pontes e Lacerda}\\[1mm]
+    {\bfseries Bacharelado em Engenharia Elétrica}\\
+    {\bfseries Circuitos Elétricos II} \hfill {\bfseries 1º Semestre de 2026}\\[1mm]
+    {\bfseries Professor da disciplina}\\[3mm]
+    {\color{ifmtblue}\rule{0.95\linewidth}{0.5pt}}\\[1mm]
+    {\fontsize{20}{22}\selectfont\bfseries\color{ifmtblue} LISTA DE EXERCÍCIOS}\\[1mm]
+    {\Large\bfseries\color{ifmtblue} Prova 02}\\[1mm]
+    {\color{ifmtblue}\rule{0.95\linewidth}{0.5pt}}
+\end{center}
+
+\vspace{1mm}
+\textbf{Aluno(a): }\rule{0.68\linewidth}{0.4pt}\hfill
+\textbf{Nº matrícula: }\rule{0.18\linewidth}{0.4pt}
+
+\vspace{2mm}
+{\Large\bfseries Revisão Avançada de Circuitos em Paralelo e Transitórios}
+
+\vspace{2mm}
+\small
+
+\begin{multicols}{2}
+\raggedcolumns
+
+\begin{minipage}{\linewidth}
+\itemtitulo{1} Na figura 01, considere que a chave permaneceu fechada por um longo período e é aberta em $t=0$. Determine $v_C(t)$, a corrente no ramo do capacitor e a corrente no resistor de $8\,\Omega$ para $t>0$.
+\begin{center}
+\begin{circuitikz}[scale=0.82]
+\draw
+(0,0) to[battery1,l=$30\,V$] (0,3.6)
+      to[R,l=$3\,\Omega$] (2.3,3.6)
+      to[opening switch] (3.7,3.6) node[midway,above,yshift=2pt] {$t=0$}
+      -- (5.6,3.6)
+      to[R,l=$8\,\Omega$] (5.6,0)
+      -- (0,0);
+\draw
+(3.7,3.6) to[R,l=$4\,\Omega$] (3.7,1.8)
+      to[C,l=$0{,}2\,F$, v^<=$v_C$] (3.7,0);
+\end{circuitikz}
+\end{center}
+\figleg{01}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{2} Na figura 02, seja $v_C(0)=48\,V$. Determine $v_C(t)$, $v_x(t)$ e $i_x(t)$ para $t\geq 0$, considerando que o capacitor descarrega em uma rede puramente resistiva com dois ramos em paralelo.
+\begin{center}
+\begin{circuitikz}[scale=0.86]
+\draw
+(0,0) -- (0,3.4) -- (2,3.4)
+      to[R,l=$6\,\Omega$] (2,0) -- (0,0);
+\draw
+(2,3.4) -- (4.3,3.4)
+      to[R,l=$3\,\Omega$, i>_=$i_x$] (4.3,1.7)
+      to[R,l=$9\,\Omega$, v^>=$v_x$] (4.3,0) -- (2,0);
+\draw
+(2,3.4) to[C,l_=$0{,}5\,F$, v^<=$v_C$] (2,0);
+\end{circuitikz}
+\end{center}
+\figleg{02}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{3} No circuito da figura 03, a chave foi mantida fechada por um longo período e é aberta em $t=0$. Determine a resistência equivalente vista pelo capacitor após a comutação, a constante de tempo e a expressão de $v(t)$ para $t>0$.
+\begin{center}
+\begin{circuitikz}[scale=0.82]
+\draw
+(0,0) to[battery1,l=$20\,V$] (0,4)
+      to[R,l=$2\,\Omega$] (2.2,4)
+      to[opening switch] (3.6,4) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.1,4)
+      to[R,l=$10\,\Omega$] (6.1,0)
+      -- (0,0);
+\draw
+(3.6,4) to[R,l=$5\,\Omega$] (3.6,2)
+      to[C,l=$\frac{1}{4}\,F$, v^<=$v$] (3.6,0);
+\draw
+(4.9,4) to[R,l=$20\,\Omega$] (4.9,0);
+\end{circuitikz}
+\end{center}
+\figleg{03}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{4} Na figura 04, a chave fecha em $t=0$ com o capacitor inicialmente descarregado. Determine $v_C(t)$, $i_C(t)$ e a corrente fornecida pela fonte para $t>0$.
+\begin{center}
+\begin{circuitikz}[scale=0.82]
+\draw
+(0,0) to[battery1,l=$24\,V$] (0,3.6)
+      to[R,l=$4\,\Omega$] (2.1,3.6)
+      to[closing switch] (3.5,3.6) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.1,3.6)
+      to[R,l=$12\,\Omega$] (6.1,0)
+      -- (0,0);
+\draw
+(3.5,3.6) to[C,l=$0{,}25\,F$, i>_=$i_C$] (3.5,0);
+\draw
+(4.8,3.6) to[R,l=$6\,\Omega$] (4.8,0);
+\end{circuitikz}
+\end{center}
+\figleg{04}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{5} Na figura 05, o capacitor possui tensão inicial $v_C(0)=36\,V$. Determine $v_C(t)$ e as correntes nos ramos de $4\,\Omega$ e $12\,\Omega$ para $t\ge 0$.
+\begin{center}
+\begin{circuitikz}[scale=0.84]
+\draw
+(0,0) -- (0,3.4) -- (2.3,3.4)
+      to[R,l=$4\,\Omega$] (2.3,0) -- (0,0);
+\draw
+(2.3,3.4) -- (4.7,3.4)
+      to[R,l=$12\,\Omega$] (4.7,0) -- (2.3,0);
+\draw
+(2.3,3.4) to[R,l=$3\,\Omega$] (3.5,3.4)
+      to[C,l=$0{,}1\,F$, v^<=$v_C$] (3.5,0);
+\end{circuitikz}
+\end{center}
+\figleg{05}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{6} Na figura 06, determine $v_o(t)$ para $t>0$ considerando que a chave esteve fechada por longo tempo e abre em $t=0$. Em seguida, calcule a energia inicialmente armazenada no capacitor.
+\begin{center}
+\begin{circuitikz}[scale=0.8]
+\draw
+(0,0) to[battery1,l=$18\,V$] (0,3.6)
+      to[R,l=$1\,\Omega$] (1.8,3.6)
+      to[opening switch] (3.2,3.6) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.0,3.6)
+      to[R,l=$9\,\Omega$] (6.0,0)
+      -- (0,0);
+\draw
+(3.2,3.6) to[R,l=$6\,\Omega$] (3.2,1.8)
+      to[C,l=$0{,}4\,F$, v^<=$v_o$] (3.2,0);
+\draw
+(4.6,3.6) to[R,l=$18\,\Omega$] (4.6,0);
+\end{circuitikz}
+\end{center}
+\figleg{06}
+\end{minipage}
+
+\columnbreak
+
+\begin{minipage}{\linewidth}
+\itemtitulo{7} Na figura 07, considere $i_L(0)=8\,A$. Determine $i_L(t)$ e a corrente no resistor de $3\,\Omega$ para $t>0$.
+\begin{center}
+\begin{circuitikz}[scale=0.86]
+\draw
+(0,0) -- (0,3.6) -- (2.2,3.6)
+      to[R,l=$3\,\Omega$] (2.2,0) -- (0,0);
+\draw
+(2.2,3.6) -- (4.8,3.6)
+      to[R,l=$6\,\Omega$] (4.8,0) -- (2.2,0);
+\draw
+(3.5,3.6) to[L,l=$2\,H$, i>_=$i_L$] (3.5,0);
+\end{circuitikz}
+\end{center}
+\figleg{07}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{8} A chave da figura 08 foi mantida fechada por muito tempo e é aberta em $t=0$. Determine $i(t)$ no indutor, a tensão no nó superior e a corrente em cada ramo resistivo para $t>0$.
+\begin{center}
+\begin{circuitikz}[scale=0.82]
+\draw
+(0,0) to[battery1,l=$36\,V$] (0,4)
+      to[R,l=$2\,\Omega$] (1.9,4)
+      to[opening switch] (3.3,4) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.0,4)
+      to[L,l=$1\,H$, i>_=$i$] (6.0,0)
+      -- (0,0);
+\draw
+(3.3,4) to[R,l=$4\,\Omega$] (3.3,0);
+\draw
+(4.7,4) to[R,l=$8\,\Omega$] (4.7,0);
+\end{circuitikz}
+\end{center}
+\figleg{08}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{9} Na figura 09, a chave fecha em $t=0$ e o indutor parte de corrente nula. Determine $i_L(t)$, a corrente fornecida pela fonte e a corrente no resistor de $12\,\Omega$.
+\begin{center}
+\begin{circuitikz}[scale=0.82]
+\draw
+(0,0) to[battery1,l=$18\,V$] (0,3.8)
+      to[R,l=$3\,\Omega$] (2.0,3.8)
+      to[closing switch] (3.4,3.8) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.0,3.8)
+      to[L,l=$3\,H$, i>_=$i_L$] (6.0,0)
+      -- (0,0);
+\draw
+(3.4,3.8) to[R,l=$6\,\Omega$] (3.4,0);
+\draw
+(4.8,3.8) to[R,l=$12\,\Omega$] (4.8,0);
+\end{circuitikz}
+\end{center}
+\figleg{09}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{10} No circuito da figura 10, determine a resistência equivalente vista pelo indutor após a abertura da chave, a constante de tempo e $i_L(t)$ para $t>0$, sabendo que a chave permaneceu fechada por longo tempo.
+\begin{center}
+\begin{circuitikz}[scale=0.8]
+\draw
+(0,0) to[battery1,l=$40\,V$] (0,4)
+      to[R,l=$5\,\Omega$] (2.2,4)
+      to[opening switch] (3.6,4) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.1,4)
+      to[L,l=$2\,H$, i>_=$i_L$] (6.1,0)
+      -- (0,0);
+\draw
+(3.6,4) to[R,l=$10\,\Omega$] (3.6,0);
+\draw
+(4.9,4) to[R,l=$20\,\Omega$] (4.9,0);
+\end{circuitikz}
+\end{center}
+\figleg{10}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{11} Na figura 11, seja $i_L(0)=12\,A$. Determine $i_L(t)$ e a tensão $v_x(t)$ para $t\ge 0$ no ramo que contém o resistor de $4\,\Omega$.
+\begin{center}
+\begin{circuitikz}[scale=0.86]
+\draw
+(0,0) -- (0,3.6) -- (2.3,3.6)
+      to[R,l=$4\,\Omega$, v^>=$v_x$] (2.3,0) -- (0,0);
+\draw
+(2.3,3.6) -- (4.8,3.6)
+      to[R,l=$8\,\Omega$] (4.8,0) -- (2.3,0);
+\draw
+(3.6,3.6) to[R,l=$2\,\Omega$] (3.6,1.8)
+      to[L,l=$1{,}5\,H$, i>_=$i_L$] (3.6,0);
+\end{circuitikz}
+\end{center}
+\figleg{11}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{12} A chave da figura 12 é fechada em $t=0$. Determine $i(t)$ no indutor para $t>0$ e calcule os valores de $i(0^+)$, $i(\infty)$ e $v_L(0^+)$. 
+\begin{center}
+\begin{circuitikz}[scale=0.8]
+\draw
+(0,0) to[I,l=$10\,A$] (0,4)
+      -- (1.8,4)
+      to[closing switch] (3.2,4) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.2,4)
+      to[L,l=$0{,}5\,H$, i>_=$i$] (6.2,0)
+      -- (0,0);
+\draw
+(3.2,4) to[R,l=$2\,\Omega$] (3.2,0);
+\draw
+(4.7,4) to[R,l=$4\,\Omega$] (4.7,0);
+\end{circuitikz}
+\end{center}
+\figleg{12}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{13} No circuito da figura 13, a chave esteve fechada por longo tempo e abre em $t=0$. Determine $i_L(t)$, $i_1(t)$ e $i_2(t)$ para $t>0$, sendo $i_1$ e $i_2$ as correntes nos ramos de $6\,\Omega$ e $3\,\Omega$.
+\begin{center}
+\begin{circuitikz}[scale=0.82]
+\draw
+(0,0) to[battery1,l=$28\,V$] (0,3.8)
+      to[R,l=$2\,\Omega$] (2.0,3.8)
+      to[opening switch] (3.4,3.8) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.1,3.8)
+      to[L,l=$1\,H$, i>_=$i_L$] (6.1,0)
+      -- (0,0);
+\draw
+(3.4,3.8) to[R,l=$6\,\Omega$] (3.4,0);
+\draw
+(4.8,3.8) to[R,l=$3\,\Omega$] (4.8,0);
+\end{circuitikz}
+\end{center}
+\figleg{13}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{14} Na figura 14, considere que $i_L(0)=5\,A$. Determine $i_L(t)$ e a potência dissipada em cada resistor no instante $t=0^+$ e no regime permanente final.
+\begin{center}
+\begin{circuitikz}[scale=0.84]
+\draw
+(0,0) -- (0,3.8) -- (2.0,3.8)
+      to[R,l=$5\,\Omega$] (2.0,0) -- (0,0);
+\draw
+(2.0,3.8) -- (4.4,3.8)
+      to[R,l=$10\,\Omega$] (4.4,0) -- (2.0,0);
+\draw
+(3.2,3.8) to[L,l=$2{,}5\,H$, i>_=$i_L$] (3.2,0);
+\end{circuitikz}
+\end{center}
+\figleg{14}
+\end{minipage}
+
+\columnbreak
+
+\begin{minipage}{\linewidth}
+\itemtitulo{15} Para a figura 15, determine: (a) $i(0^+)$ e $v(0^+)$; (b) $\dfrac{di(0^+)}{dt}$ e $\dfrac{dv(0^+)}{dt}$; (c) $i(\infty)$ e $v(\infty)$. Considere a chave fechando em $t=0$.
+\begin{center}
+\begin{circuitikz}[scale=0.8]
+\draw
+(0,0) to[battery1,l=$12\,V$] (0,4)
+      to[closing switch] (1.5,4) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.0,4)
+      to[R,l=$6\,\Omega$] (6.0,0)
+      -- (0,0);
+\draw
+(2.8,4) to[R,l=$3\,\Omega$] (2.8,2)
+      to[L,l=$1\,H$, i>_=$i$] (2.8,0);
+\draw
+(4.4,4) to[C,l=$0{,}25\,F$, v^<=$v$] (4.4,0);
+\end{circuitikz}
+\end{center}
+\figleg{15}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{16} Na figura 16, a chave esteve fechada por longo tempo e abre em $t=0$. Determine $v_C(t)$ e $i_L(t)$ para $t>0$, bem como a energia total inicialmente armazenada em $L$ e em $C$.
+\begin{center}
+\begin{circuitikz}[scale=0.8]
+\draw
+(0,0) to[battery1,l=$20\,V$] (0,4)
+      to[R,l=$2\,\Omega$] (2.0,4)
+      to[opening switch] (3.4,4) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.2,4)
+      to[R,l=$8\,\Omega$] (6.2,0)
+      -- (0,0);
+\draw
+(3.4,4) to[L,l=$2\,H$, i>_=$i_L$] (3.4,0);
+\draw
+(4.9,4) to[C,l=$0{,}2\,F$, v^<=$v_C$] (4.9,0);
+\end{circuitikz}
+\end{center}
+\figleg{16}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{17} Para o circuito da figura 17, determine a equação diferencial do nó superior para $v(t)$ e, a partir dela, obtenha $v(t)$ para $t>0$. Considere que $v_C(0)=10\,V$ e $i_L(0)=0\,A$.
+\begin{center}
+\begin{circuitikz}[scale=0.82]
+\draw
+(0,0) -- (0,3.8) -- (2.2,3.8)
+      to[R,l=$4\,\Omega$] (2.2,0) -- (0,0);
+\draw
+(2.2,3.8) -- (4.4,3.8)
+      to[C,l=$0{,}1\,F$, v^<=$v$] (4.4,0) -- (2.2,0);
+\draw
+(3.3,3.8) to[L,l=$1\,H$] (3.3,0);
+\end{circuitikz}
+\end{center}
+\figleg{17}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{18} Na figura 18, a fonte de corrente é aplicada em $t=0$. Determine: (a) $v(0^+)$ e $i(0^+)$; (b) $\dfrac{dv(0^+)}{dt}$ e $\dfrac{di(0^+)}{dt}$; (c) os valores finais de $v$ e $i$.
+\begin{center}
+\begin{circuitikz}[scale=0.78]
+\draw
+(0,0) to[I,l=$4u(t)\,A$] (0,4)
+      -- (6.2,4)
+      to[R,l=$8\,\Omega$] (6.2,0)
+      -- (0,0);
+\draw
+(2.3,4) to[L,l=$0{,}5\,H$, i>_=$i$] (2.3,0);
+\draw
+(4.2,4) to[C,l=$0{,}125\,F$, v^<=$v$] (4.2,0);
+\end{circuitikz}
+\end{center}
+\figleg{18}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{19} Na figura 19, suponha que a chave tenha permanecido fechada por um longo período e seja aberta em $t=0$. Determine as condições iniciais, a forma da resposta natural e os valores de $v_C(t)$ e $i_L(t)$ para $t>0$.
+\begin{center}
+\begin{circuitikz}[scale=0.78]
+\draw
+(0,0) to[battery1,l=$16\,V$] (0,4)
+      to[R,l=$2\,\Omega$] (1.8,4)
+      to[opening switch] (3.2,4) node[midway,above,yshift=2pt] {$t=0$}
+      -- (6.3,4)
+      to[R,l=$10\,\Omega$] (6.3,0)
+      -- (0,0);
+\draw
+(3.2,4) to[L,l=$1\,H$, i>_=$i_L$] (3.2,0);
+\draw
+(4.8,4) to[C,l=$0{,}05\,F$, v^<=$v_C$] (4.8,0);
+\end{circuitikz}
+\end{center}
+\figleg{19}
+\end{minipage}
+
+\vspace{0.25cm}
+\begin{minipage}{\linewidth}
+\itemtitulo{20} Para a figura 20, determine $v(t)$ no nó superior para $t>0$, sabendo que a fonte senoidal não atua e que, no instante inicial, $v_C(0)=6\,V$ e $i_L(0)=2\,A$. Classifique a resposta como superamortecida, criticamente amortecida ou subamortecida.
+\begin{center}
+\begin{circuitikz}[scale=0.8]
+\draw
+(0,0) -- (0,4) -- (6.2,4)
+      to[R,l=$5\,\Omega$] (6.2,0)
+      -- (0,0);
+\draw
+(2.1,4) to[C,l=$0{,}2\,F$, v^<=$v$] (2.1,0);
+\draw
+(4.3,4) to[L,l=$1\,H$, i>_=$i_L$] (4.3,0);
+\end{circuitikz}
+\end{center}
+\figleg{20}
+\end{minipage}
+
+\end{multicols}
+
+\vspace{1mm}
+{\small \textbf{Observação:} Apresente todos os desenvolvimentos, determine as condições iniciais com clareza e indique as unidades finais em cada resultado.}
+
+\end{document}
